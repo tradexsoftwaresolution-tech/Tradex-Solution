@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
@@ -225,7 +226,7 @@ export default function TradexSolutionPage() {
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2 shadow-[0_16px_40px_rgba(0,0,0,0.28)] backdrop-blur">
               <img
                 src="/Gemini_Generated_Image_v1z8tzv1z8tzv1z8-removebg-preview.png"
@@ -233,7 +234,7 @@ export default function TradexSolutionPage() {
                 className="h-11 w-auto sm:h-12"
               />
             </div>
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
@@ -338,6 +339,128 @@ export default function TradexSolutionPage() {
             </StaggerItem>
           ))}
         </StaggerContainer>
+      </section>
+
+      {/* Partner Brands Section */}
+      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <AnimatedSection>
+          <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-8 lg:p-12">
+            <div className="mb-10 text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#ed1c24]/80">
+                Powered by industry leaders
+              </p>
+              <h2 className="mt-4 font-heading text-2xl font-semibold text-white sm:text-3xl">
+                Partnering with world-class technology providers
+              </h2>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <motion.a
+                href="https://optitex.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-8 transition-all duration-300 hover:border-[#ed1c24]/30 hover:bg-white/[0.06] hover:shadow-glow-sm"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#ed1c24]/0 via-[#ed1c24]/0 to-[#ed1c24]/0 opacity-0 transition-opacity duration-500 group-hover:from-[#ed1c24]/5 group-hover:via-transparent group-hover:to-transparent group-hover:opacity-100" />
+                
+                <div className="relative">
+                  <div className="mb-6 flex items-center justify-between">
+                    <div className="rounded-xl bg-white px-6 py-4 shadow-lg">
+                      <img
+                        src="/optitex.png"
+                        alt="Optitex"
+                        className="h-16 w-auto transition-all duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <svg
+                      className="h-5 w-5 text-zinc-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ed1c24]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="font-heading text-xl font-semibold text-white">
+                    Fashion Design Software | 2D/3D CAD CAM
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-zinc-400">
+                    Interoperable 2D/3D portfolio with precision patternmaking, functional grading, and seamless collaboration tools across the entire supply chain.
+                  </p>
+                  <ul className="mt-6 space-y-2 text-sm text-zinc-300">
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-[#ed1c24]" />
+                      <span>Perfect fit from great art</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-[#ed1c24]" />
+                      <span>Production-ready digital patterns</span>
+                    </li>
+                  </ul>
+                </div>
+              </motion.a>
+
+              <motion.a
+                href="https://www.sinajet.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-8 transition-all duration-300 hover:border-[#ed1c24]/30 hover:bg-white/[0.06] hover:shadow-glow-sm"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#ed1c24]/0 via-[#ed1c24]/0 to-[#ed1c24]/0 opacity-0 transition-opacity duration-500 group-hover:from-[#ed1c24]/5 group-hover:via-transparent group-hover:to-transparent group-hover:opacity-100" />
+                
+                <div className="relative">
+                  <div className="mb-6 flex items-center justify-between">
+                    <div className="rounded-xl bg-white px-6 py-4 shadow-lg">
+                      <img
+                        src="/sinajet.png"
+                        alt="Sinajet"
+                        className="h-16 w-auto transition-all duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <svg
+                      className="h-5 w-5 text-zinc-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ed1c24]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="font-heading text-xl font-semibold text-white">
+                    Digital Cutter Manufacturer
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-zinc-400">
+                    Professional intelligent cutting solutions for MTM, small layers, and sample clothing cutting in garment and textile industry with powerful active circular knife technology.
+                  </p>
+                  <ul className="mt-6 space-y-2 text-sm text-zinc-300">
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-[#ed1c24]" />
+                      <span>Precision cutting at 1500mm/s</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1 h-2 w-2 rounded-full bg-[#ed1c24]" />
+                      <span>Low energy, no overcut technology</span>
+                    </li>
+                  </ul>
+                </div>
+              </motion.a>
+            </div>
+          </div>
+        </AnimatedSection>
       </section>
 
       <section id="solutions" className="mx-auto max-w-7xl px-6 py-20 lg:px-8">

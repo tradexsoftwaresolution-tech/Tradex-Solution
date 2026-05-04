@@ -3,11 +3,20 @@
 import { useEffect, useState } from "react";
 
 export default function TradexIntro() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setIsVisible(false), 6800);
-    return () => window.clearTimeout(timer);
+    // Check if intro has already been shown in this session
+    const hasShownIntro = sessionStorage.getItem("tradex-intro-shown");
+    
+    if (!hasShownIntro) {
+      // Show intro only on first visit
+      setIsVisible(true);
+      sessionStorage.setItem("tradex-intro-shown", "true");
+      
+      const timer = window.setTimeout(() => setIsVisible(false), 6800);
+      return () => window.clearTimeout(timer);
+    }
   }, []);
 
   if (!isVisible) {

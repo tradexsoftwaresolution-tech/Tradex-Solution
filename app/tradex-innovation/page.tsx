@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function TradexInnovationPage() {
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-20">
@@ -17,21 +19,20 @@ export default function TradexInnovationPage() {
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
+          <Link
             href="/"
             className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/10"
           >
             Back to gateway
-          </a>
-          <a
+          </Link>
+          <Link
             href="/tradex-solution"
             className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-zinc-200"
           >
             Open Tradex Solution
-          </a>
+          </Link>
         </div>
       </div>
     </main>
   );
 }
-

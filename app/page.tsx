@@ -1,3 +1,4 @@
+import Link from "next/link";
 import EnergyOrb from "../components/EnergyOrb";
 import FabricMesh from "../components/FabricMesh";
 import TradexIntro from "../components/TradexIntro";
@@ -15,7 +16,7 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_top_left,_rgba(237,28,36,0.2),_transparent_35%)] opacity-70 transition duration-500 group-hover:opacity-100" />
           <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/10 via-black/35 to-black/80" />
           <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(135deg,rgba(237,28,36,0.16),transparent_40%,rgba(0,0,0,0.5))]" />
-          <a href="/tradex-solution" className="relative z-10 block w-full max-w-[40rem]">
+          <Link href="/tradex-solution" className="relative z-10 block w-full max-w-[40rem]">
             <p className="text-xs font-semibold uppercase tracking-[0.34em] text-red-400/85">
               Tradex Solution
             </p>
@@ -26,7 +27,7 @@ export default function Home() {
               Enter the full Tradex Solution experience for design workflows, cutting systems, and
               implementation-led business transformation.
             </p>
-          </a>
+          </Link>
         </div>
 
         <div className="group relative isolate flex min-h-[50vh] items-end overflow-hidden px-6 py-10 transition duration-500 hover:bg-[rgba(127,29,29,0.15)] lg:min-h-screen lg:px-10 lg:py-12">
@@ -34,7 +35,7 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_top_right,_rgba(127,29,29,0.25),_transparent_35%)] opacity-70 transition duration-500 group-hover:opacity-100" />
           <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/10 via-black/35 to-black/80" />
           <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(225deg,rgba(127,29,29,0.2),transparent_38%,rgba(0,0,0,0.48))]" />
-          <a href="/tradex-innovation" className="relative z-10 block w-full max-w-[40rem]">
+          <Link href="/tradex-innovation" className="relative z-10 block w-full max-w-[40rem]">
             <p className="text-xs font-semibold uppercase tracking-[0.34em] text-red-300/85">
               Tradex Innovation
             </p>
@@ -45,7 +46,7 @@ export default function Home() {
               A focused space for building and launching solutions that improve real-world
               operations through modern technology and system-driven thinking.
             </p>
-          </a>
+          </Link>
         </div>
       </section>
     </main>
