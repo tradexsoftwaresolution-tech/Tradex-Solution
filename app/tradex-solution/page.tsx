@@ -117,7 +117,7 @@ export default function TradexSolutionPage() {
           <a href="/" className="flex items-center gap-3">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2 shadow-[0_16px_40px_rgba(0,0,0,0.28)] backdrop-blur">
               <img
-                src="/tradex-logo-dark.svg"
+                src="/Gemini_Generated_Image_v1z8tzv1z8tzv1z8-removebg-preview.png"
                 alt="Tradex Solution"
                 className="h-11 w-auto sm:h-12"
               />
@@ -145,7 +145,7 @@ export default function TradexSolutionPage() {
         </div>
       </header>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-16 px-6 pb-20 pt-16 lg:px-8 lg:pb-28 lg:pt-24">
+      <section className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-16 px-6 pb-20 pt-16 lg:px-8 lg:pb-28 lg:pt-24">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div className="space-y-8">
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.28em] text-zinc-300">
