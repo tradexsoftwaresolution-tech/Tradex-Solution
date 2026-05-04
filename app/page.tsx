@@ -45,11 +45,10 @@ export default function Home() {
               Tradex Innovation
             </p>
             <h2 className="mt-5 font-heading text-4xl font-semibold leading-[0.94] tracking-tight text-white sm:text-5xl lg:min-h-[5.1em] lg:text-6xl">
-              A separate gateway for future products, ideas, and experimental ventures.
+             A gateway for building intelligent digital systems and solutions.
             </h2>
             <p className="mt-5 max-w-[36rem] text-base leading-8 text-zinc-300 sm:text-lg">
-              Open the new empty Innovation area as a dedicated space for a second brand direction
-              with its own identity and upcoming content.
+A focused space for building and launching solutions that improve real-world operations through modern technology and system-driven thinking.
             </p>
           </div>
         </a>
