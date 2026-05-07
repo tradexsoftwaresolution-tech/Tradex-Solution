@@ -23,6 +23,7 @@ const config: Config = {
       backgroundImage: {
         "mesh-grid":
           "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
       animation: {
         "float": "float 8s ease-in-out infinite",
