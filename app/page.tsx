@@ -24,7 +24,7 @@ export default function Home() {
               Digital apparel systems and production-focused technology.
             </h1>
             <p className="mt-5 max-w-[36rem] text-base leading-8 text-zinc-300 sm:text-lg">
-              Enter the full Tradex Solution experience for design workflows, cutting systems, and
+              As the exclusive partner of Sinajet and Optitex, enter the full Tradex Solution experience for design workflows, cutting systems, and
               implementation-led business transformation.
             </p>
           </Link>

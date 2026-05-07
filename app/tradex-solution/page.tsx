@@ -291,7 +291,7 @@ export default function TradexSolutionPage() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="max-w-2xl text-lg leading-8 text-zinc-400 sm:text-xl"
               >
-                Tradex connects design, fit validation, and intelligent cutting into one modern
+                As the exclusive partner of Sinajet and Optitex, Tradex connects design, fit validation, and intelligent cutting into one modern
                 workflow so teams can move faster, waste less, and launch with confidence.
               </motion.p>
             </div>
