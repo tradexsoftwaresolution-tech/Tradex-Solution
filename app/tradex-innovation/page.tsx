@@ -130,7 +130,7 @@ function SectionHeading({
 
 export default function TradexInnovationPage() {
   const { scrollYProgress } = useScroll();
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [0.3, 1]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [0.92, 1]);
 
   return (
     <main className="relative isolate overflow-hidden bg-[#000308]">
@@ -140,23 +140,23 @@ export default function TradexInnovationPage() {
       {/* Cinematic header with enhanced glass morphism and effects */}
       <motion.header 
         style={{ opacity: headerOpacity }}
-        className="sticky top-0 z-50 border-b border-cyan-500/10 bg-gradient-to-r from-black/30 via-black/20 to-black/30 backdrop-blur-2xl"
+        className="sticky top-0 z-50 border-b border-cyan-400/35 bg-gradient-to-r from-black/70 via-black/55 to-black/70 shadow-[0_0_54px_rgba(34,211,238,0.18)] backdrop-blur-2xl"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-blue-500/5 to-indigo-500/5" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/16 via-blue-500/10 to-indigo-500/16" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-400/26 via-cyan-500/8 to-transparent" />
         
         <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <Link href="/" className="flex items-center gap-3 group">
             <motion.div
               whileHover={{ scale: 1.05, rotateY: 10 }}
               transition={{ duration: 0.3 }}
-              className="relative rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 px-3 py-2 shadow-[0_0_30px_rgba(6,182,212,0.15)] backdrop-blur-xl"
+              className="relative rounded-2xl border border-cyan-300/55 bg-gradient-to-br from-cyan-500/28 to-blue-500/18 px-3 py-2 shadow-[0_0_44px_rgba(34,211,238,0.42),inset_0_0_28px_rgba(34,211,238,0.16)] backdrop-blur-xl"
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-[-1px] rounded-2xl bg-gradient-to-br from-cyan-400/30 to-blue-400/20 opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
               <img
                 src={getAssetPath("/Tradex-innovations.png")}
                 alt="Tradex Innovation"
-                className="relative h-11 w-auto sm:h-12"
+                className="relative h-11 w-auto brightness-125 contrast-125 drop-shadow-[0_0_12px_rgba(103,232,249,0.45)] sm:h-12"
               />
             </motion.div>
           </Link>
@@ -170,7 +170,7 @@ export default function TradexInnovationPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, color: "#67e8f9" }}
-                className="relative text-sm text-zinc-300 transition-colors duration-200 group"
+                className="relative text-sm font-medium text-zinc-100 drop-shadow-[0_0_12px_rgba(34,211,238,0.38)] transition-colors duration-200 group"
               >
                 <span className="relative z-10">{item.label}</span>
                 <motion.span
@@ -187,10 +187,10 @@ export default function TradexInnovationPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             whileHover={{ 
               scale: 1.05, 
-              boxShadow: "0 0 30px rgba(34, 211, 238, 0.4)",
+              boxShadow: "0 0 34px rgba(34, 211, 238, 0.46)",
             }}
             whileTap={{ scale: 0.95 }}
-            className="relative overflow-hidden rounded-full border border-cyan-500/30 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 px-6 py-2.5 text-sm font-medium text-white backdrop-blur-xl transition-all duration-300"
+            className="relative overflow-hidden rounded-full border border-cyan-300/55 bg-gradient-to-r from-cyan-500/24 to-blue-500/20 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_0_36px_rgba(34,211,238,0.34),inset_0_0_22px_rgba(34,211,238,0.12)] backdrop-blur-xl transition-all duration-300"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300" />
             <span className="relative z-10 flex items-center gap-2">

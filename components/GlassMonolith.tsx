@@ -34,53 +34,55 @@ export function GlassMonolith({
   };
 
   return (
-    <motion.div
-      whileHover={{ 
-        y: -8,
-        rotateX: 2,
-        rotateY: 2,
-      }}
-      transition={{ 
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1]
-      }}
-      className={`group relative ${variants[variant]} ${className}`}
-    >
-      {/* Atmospheric glow behind card */}
-      <div 
-        className="absolute inset-0 -z-10 rounded-[inherit] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100"
-        style={{ backgroundColor: glowColors[glowColor] }}
-      />
-
-      {/* Glass surface with multiple layers */}
-      <div className="absolute inset-0 overflow-hidden rounded-[inherit] border border-white/10 bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-white/[0.01] backdrop-blur-xl">
-        {/* Subtle reflection gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        
-        {/* Edge lighting */}
-        <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),inset_0_-1px_0_0_rgba(255,255,255,0.05)]" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10">
-        {children}
-      </div>
-
-      {/* Holographic scan line effect */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-        <motion.div
-          animate={{
-            y: ["-100%", "200%"],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent blur-sm"
+    <div className={`group relative ${className}`}>
+      <motion.div
+        whileHover={{
+          y: -8,
+          rotateX: 2,
+          rotateY: 2,
+        }}
+        transition={{
+          duration: 0.4,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+        className={`relative ${variants[variant]}`}
+      >
+        {/* Atmospheric glow behind card */}
+        <div
+          className="absolute inset-0 -z-10 rounded-[inherit] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100"
+          style={{ backgroundColor: glowColors[glowColor] }}
         />
-      </div>
-    </motion.div>
+
+        {/* Glass surface with multiple layers */}
+        <div className="absolute inset-0 overflow-hidden rounded-[inherit] border border-white/10 bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-white/[0.01] backdrop-blur-xl">
+          {/* Subtle reflection gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+          {/* Edge lighting */}
+          <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),inset_0_-1px_0_0_rgba(255,255,255,0.05)]" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10">
+          {children}
+        </div>
+
+        {/* Holographic scan line effect */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <motion.div
+            animate={{
+              y: ["-100%", "200%"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent blur-sm"
+          />
+        </div>
+      </motion.div>
+    </div>
   );
 }
 

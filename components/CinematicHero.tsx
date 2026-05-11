@@ -20,23 +20,23 @@ export function CinematicHero({ children, className = "" }: CinematicHeroProps) 
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2"
       >
         {/* Core glow */}
-        <div className="absolute inset-0 rounded-full bg-gradient-radial from-blue-500/20 via-cyan-500/10 to-transparent blur-3xl" />
+        <div className="absolute inset-0 rounded-full bg-gradient-radial from-blue-500/[0.025] via-cyan-500/[0.015] to-transparent blur-3xl" />
         
         {/* Outer atmosphere */}
         <motion.div
           animate={{
             scale: [1, 1.1, 1],
-            opacity: [0.3, 0.5, 0.3],
+            opacity: [0.04, 0.08, 0.04],
           }}
           transition={{
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute inset-0 rounded-full bg-gradient-radial from-indigo-500/10 via-blue-500/5 to-transparent blur-2xl"
+          className="absolute inset-0 rounded-full bg-gradient-radial from-indigo-500/[0.018] via-blue-500/[0.012] to-transparent blur-2xl"
         />
       </motion.div>
 
@@ -53,7 +53,7 @@ export function CinematicHero({ children, className = "" }: CinematicHeroProps) 
           }}
           className="absolute left-1/2 top-1/2 h-[1200px] w-[1200px] -translate-x-1/2 -translate-y-1/2"
         >
-          <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(59,130,246,0.03)_45deg,transparent_90deg,transparent_180deg,rgba(34,211,238,0.03)_225deg,transparent_270deg)] blur-2xl" />
+          <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(59,130,246,0.005)_45deg,transparent_90deg,transparent_180deg,rgba(34,211,238,0.005)_225deg,transparent_270deg)] blur-2xl" />
         </motion.div>
       </div>
 
@@ -62,26 +62,26 @@ export function CinematicHero({ children, className = "" }: CinematicHeroProps) 
         <motion.div
           animate={{
             x: [-100, 100, -100],
-            opacity: [0.3, 0.5, 0.3],
+            opacity: [0.04, 0.08, 0.04],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute left-0 top-[20%] h-[400px] w-[600px] rounded-full bg-gradient-radial from-blue-900/10 to-transparent blur-3xl"
+          className="absolute left-0 top-[20%] h-[260px] w-[420px] rounded-full bg-gradient-radial from-blue-900/[0.018] to-transparent blur-3xl"
         />
         <motion.div
           animate={{
             x: [100, -100, 100],
-            opacity: [0.2, 0.4, 0.2],
+            opacity: [0.03, 0.06, 0.03],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute right-0 top-[40%] h-[500px] w-[700px] rounded-full bg-gradient-radial from-indigo-900/10 to-transparent blur-3xl"
+          className="absolute right-0 top-[40%] h-[320px] w-[480px] rounded-full bg-gradient-radial from-indigo-900/[0.018] to-transparent blur-3xl"
         />
       </div>
 
@@ -110,7 +110,7 @@ export function CinematicHero({ children, className = "" }: CinematicHeroProps) 
       {/* Lens glow effect */}
       <motion.div
         animate={{
-          opacity: [0.1, 0.2, 0.1],
+          opacity: [0.01, 0.025, 0.01],
           scale: [1, 1.05, 1],
         }}
         transition={{
@@ -118,7 +118,7 @@ export function CinematicHero({ children, className = "" }: CinematicHeroProps) 
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-radial from-white/5 to-transparent blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-radial from-white/[0.006] to-transparent blur-3xl"
       />
     </div>
   );
@@ -150,7 +150,7 @@ export function MonumentalText({ children, className = "" }: { children: ReactNo
       className={`relative ${className}`}
     >
       {/* Text glow */}
-      <span className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-blue-500/20 bg-clip-text blur-2xl">
+      <span className="absolute inset-0 bg-gradient-to-r from-blue-500/[0.025] via-cyan-500/[0.025] to-blue-500/[0.025] bg-clip-text blur-sm">
         {children}
       </span>
       
