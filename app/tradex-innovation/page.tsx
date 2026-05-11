@@ -137,47 +137,71 @@ export default function TradexInnovationPage() {
       {/* 3D Immersive Photorealistic Nebula Background */}
       <NebulaBackground />
 
-      {/* Cinematic header with glass morphism */}
+      {/* Cinematic header with enhanced glass morphism and effects */}
       <motion.header 
         style={{ opacity: headerOpacity }}
-        className="sticky top-0 z-50 border-b border-white/5 bg-black/20 backdrop-blur-2xl"
+        className="sticky top-0 z-50 border-b border-cyan-500/10 bg-gradient-to-r from-black/30 via-black/20 to-black/30 backdrop-blur-2xl"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <Link href="/" className="flex items-center gap-3">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-blue-500/5 to-indigo-500/5" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent" />
+        
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+          <Link href="/" className="flex items-center gap-3 group">
             <motion.div
               whileHover={{ scale: 1.05, rotateY: 10 }}
               transition={{ duration: 0.3 }}
-              className="rounded-2xl border border-white/10 bg-white/[0.02] px-3 py-2 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+              className="relative rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 px-3 py-2 shadow-[0_0_30px_rgba(6,182,212,0.15)] backdrop-blur-xl"
             >
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <img
                 src={getAssetPath("/Tradex-innovations.png")}
                 alt="Tradex Innovation"
-                className="h-11 w-auto sm:h-12"
+                className="relative h-11 w-auto sm:h-12"
               />
             </motion.div>
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
               <motion.a
                 key={item.label}
                 href={item.href}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, color: "#67e8f9" }}
-                transition={{ duration: 0.2 }}
-                className="text-sm text-zinc-400 transition"
+                className="relative text-sm text-zinc-300 transition-colors duration-200 group"
               >
-                {item.label}
+                <span className="relative z-10">{item.label}</span>
+                <motion.span
+                  className="absolute -bottom-1 left-0 h-[2px] w-0 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"
+                />
               </motion.a>
             ))}
           </nav>
 
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(34, 211, 238, 0.15)" }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: "0 0 30px rgba(34, 211, 238, 0.4)",
+            }}
             whileTap={{ scale: 0.95 }}
-            className="rounded-full border border-cyan-500/20 bg-cyan-500/5 px-5 py-2 text-sm font-medium text-white backdrop-blur-xl transition"
+            className="relative overflow-hidden rounded-full border border-cyan-500/30 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 px-6 py-2.5 text-sm font-medium text-white backdrop-blur-xl transition-all duration-300"
           >
-            Start a Project
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+            <span className="relative z-10 flex items-center gap-2">
+              Start a Project
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                →
+              </motion.span>
+            </span>
           </motion.a>
         </div>
       </motion.header>
