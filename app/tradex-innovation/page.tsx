@@ -1,45 +1,210 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { NebulaBackground } from "@/components/NebulaBackground";
 import { CinematicSection, CinematicStagger, CinematicStaggerItem, FloatingElement, CameraDrift } from "@/components/CinematicSection";
 import { GlassMonolith } from "@/components/GlassMonolith";
 import { CinematicHero, MonumentalText } from "@/components/CinematicHero";
 import { getAssetPath } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 const solutions = [
   {
     title: "AI & Machine Learning",
     description: "Integrate cutting-edge AI solutions to automate processes, enhance decision-making, and unlock insights from your data.",
     points: ["Custom AI model development", "Natural language processing", "Computer vision & image recognition", "Predictive analytics & forecasting"],
+    color: "blue",
   },
   {
     title: "Mobile App Development",
     description: "Build native and cross-platform mobile applications that deliver exceptional user experiences on iOS and Android.",
     points: ["Native iOS & Android apps", "React Native & Flutter", "Progressive Web Apps (PWA)", "App Store optimization & deployment"],
+    color: "cyan",
   },
   {
     title: "Digital Planning Systems",
     description: "Build intelligent digital planning and scheduling systems that optimize workflows, resources, and operations in real-time.",
     points: ["Resource allocation & scheduling", "Workflow automation", "Real-time collaboration tools", "Custom dashboard & reporting"],
+    color: "indigo",
   },
   {
     title: "Web Application Development",
     description: "Create powerful, responsive web applications using modern frameworks and best practices for performance and scalability.",
     points: ["React, Next.js & Vue.js", "Node.js & Python backends", "Real-time applications", "Responsive & accessible design"],
+    color: "blue",
   },
   {
     title: "Inventory & Asset Management",
     description: "Streamline operations with intelligent inventory tracking, asset management, and automated workflow systems.",
     points: ["Real-time inventory tracking", "Barcode & RFID integration", "Automated reordering systems", "Multi-location management"],
-  },
-  {
-    title: "Enterprise Solutions",
-    description: "Build robust enterprise systems that streamline operations, improve efficiency, and scale with your business growth.",
-    points: ["ERP & CRM systems", "Business process automation", "Legacy system modernization", "Enterprise API integration"],
+    color: "cyan",
   },
 ];
+
+function SolutionsCarousel({ solutions }: { solutions: typeof solutions }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % solutions.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [solutions.length]);
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % solutions.length);
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + solutions.length) % solutions.length);
+  };
+
+  const handleDotClick = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+  };
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+      rotateY: direction > 0 ? 45 : -45,
+      scale: 0.8,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      rotateY: 0,
+      scale: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -1000 : 1000,
+      opacity: 0,
+      rotateY: direction > 0 ? -45 : 45,
+      scale: 0.8,
+    }),
+  };
+
+  const currentSolution = solutions[currentIndex];
+
+  return (
+    <div className="mt-16 relative">
+      <div className="relative mx-auto max-w-4xl perspective-[2000px]">
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.4 },
+              rotateY: { duration: 0.6 },
+              scale: { duration: 0.4 },
+            }}
+            className="relative"
+          >
+            <GlassMonolith 
+              variant="premium" 
+              glowColor={currentSolution.color as "blue" | "cyan" | "indigo"}
+            >
+              <FloatingElement intensity="subtle">
+                <div className="space-y-6 min-h-[400px] flex flex-col justify-between">
+                  <div className="space-y-6">
+                    <div className="inline-flex rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-cyan-400/80 backdrop-blur-sm">
+                      Solution {currentIndex + 1} of {solutions.length}
+                    </div>
+                    <h3 className="font-heading text-4xl font-semibold text-white lg:text-5xl">
+                      {currentSolution.title}
+                    </h3>
+                    <p className="text-lg leading-8 text-zinc-400">{currentSolution.description}</p>
+                  </div>
+                  
+                  <ul className="space-y-4 pt-4 text-sm text-zinc-300">
+                    {currentSolution.points.map((point, idx) => (
+                      <motion.li 
+                        key={point}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.1 + 0.3 }}
+                        className="flex items-start gap-3"
+                      >
+                        <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
+                        <span>{point}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+              </FloatingElement>
+            </GlassMonolith>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Arrows */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between pointer-events-none px-4 -mx-20">
+          <motion.button
+            onClick={handlePrev}
+            whileHover={{ scale: 1.1, x: -4 }}
+            whileTap={{ scale: 0.9 }}
+            className="pointer-events-auto rounded-full border border-white/20 bg-black/60 p-4 text-white backdrop-blur-xl transition hover:border-cyan-400/40 hover:bg-black/80 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)]"
+          >
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </motion.button>
+          <motion.button
+            onClick={handleNext}
+            whileHover={{ scale: 1.1, x: 4 }}
+            whileTap={{ scale: 0.9 }}
+            className="pointer-events-auto rounded-full border border-white/20 bg-black/60 p-4 text-white backdrop-blur-xl transition hover:border-cyan-400/40 hover:bg-black/80 hover:shadow-[0_0_20px_rgba(34,211,238,0.3)]"
+          >
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </motion.button>
+        </div>
+      </div>
+
+      {/* Dots Navigation */}
+      <div className="mt-12 flex justify-center gap-3">
+        {solutions.map((_, index) => (
+          <motion.button
+            key={index}
+            onClick={() => handleDotClick(index)}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className={`h-2.5 rounded-full transition-all duration-300 ${
+              index === currentIndex
+                ? "w-12 bg-gradient-to-r from-cyan-400 to-blue-400 shadow-[0_0_15px_rgba(34,211,238,0.6)]"
+                : "w-2.5 bg-white/30 hover:bg-white/50"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Progress Bar */}
+      <div className="mt-8 mx-auto max-w-4xl">
+        <div className="h-1 w-full overflow-hidden rounded-full bg-white/10">
+          <motion.div
+            key={currentIndex}
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 5, ease: "linear" }}
+            className="h-full bg-gradient-to-r from-cyan-400 to-blue-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const services = [
   "AI Integration & Machine Learning",
@@ -65,6 +230,7 @@ const differentiators = [
 
 const navItems = [
   { label: "Solutions", href: "#solutions" },
+  { label: "Portfolio", href: "#portfolio" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -266,7 +432,7 @@ export default function TradexInnovationPage() {
         </CameraDrift>
       </CinematicHero>
 
-      {/* SOLUTIONS SECTION */}
+      {/* SOLUTIONS SECTION - Rotating Card Carousel */}
       <section id="solutions" className="relative mx-auto max-w-7xl px-6 py-32 lg:px-8">
         <CinematicSection>
           <SectionHeading
@@ -275,45 +441,118 @@ export default function TradexInnovationPage() {
           />
         </CinematicSection>
 
+        <SolutionsCarousel solutions={solutions} />
+      </section>
+
+      {/* PORTFOLIO SECTION */}
+      <section id="portfolio" className="relative mx-auto max-w-7xl px-6 py-32 lg:px-8">
+        <CinematicSection>
+          <SectionHeading
+            eyebrow="Our Work"
+            title="Real-world systems built for performance and efficiency"
+            description="Explore our portfolio of production-ready solutions that streamline operations and drive measurable results."
+          />
+        </CinematicSection>
+
         <CinematicStagger className="mt-16 grid gap-8 lg:grid-cols-2 xl:grid-cols-3" staggerDelay={0.2}>
-          {solutions.map((solution, index) => (
-            <CinematicStaggerItem key={solution.title}>
-              <GlassMonolith 
-                variant="premium" 
-                glowColor={
-                  index === 0 ? "blue" : 
-                  index === 1 ? "cyan" : 
-                  index === 2 ? "indigo" :
-                  index === 3 ? "blue" :
-                  index === 4 ? "cyan" : "indigo"
-                }
-              >
-                <FloatingElement intensity="subtle">
-                  <div className="space-y-6">
-                    <div className="inline-flex rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-cyan-400/80 backdrop-blur-sm">
-                      Solution
-                    </div>
-                    <h3 className="font-heading text-3xl font-semibold text-white">
-                      {solution.title}
-                    </h3>
-                    <p className="text-base leading-7 text-zinc-400">{solution.description}</p>
-                    <ul className="space-y-4 pt-4 text-sm text-zinc-300">
-                      {solution.points.map((point) => (
-                        <motion.li 
-                          key={point} 
-                          className="flex items-start gap-3"
-                          whileHover={{ x: 4 }}
-                        >
-                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-                          <span>{point}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+          {/* Garment Line Monitoring System */}
+          <CinematicStaggerItem>
+            <GlassMonolith variant="premium" glowColor="cyan">
+              <FloatingElement intensity="subtle">
+                <div className="space-y-6">
+                  <div className="inline-flex rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-cyan-400/80 backdrop-blur-sm">
+                    Production Tracking
                   </div>
-                </FloatingElement>
-              </GlassMonolith>
-            </CinematicStaggerItem>
-          ))}
+                  <h3 className="font-heading text-3xl font-semibold text-white">
+                    Garment Line Monitoring System
+                  </h3>
+                  <p className="text-base leading-7 text-zinc-400">
+                    Smart production tracking for garment factories. Monitor line efficiency, operator performance, and real-time progress with live dashboards and analytics.
+                  </p>
+                  <motion.a
+                    href="#"
+                    whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(34, 211, 238, 0.3)" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_20px_rgba(34,211,238,0.2)] transition"
+                  >
+                    View Demo
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      →
+                    </motion.span>
+                  </motion.a>
+                </div>
+              </FloatingElement>
+            </GlassMonolith>
+          </CinematicStaggerItem>
+
+          {/* Machine Service Management System */}
+          <CinematicStaggerItem>
+            <GlassMonolith variant="premium" glowColor="blue">
+              <FloatingElement intensity="subtle">
+                <div className="space-y-6">
+                  <div className="inline-flex rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-blue-400/80 backdrop-blur-sm">
+                    Service Operations
+                  </div>
+                  <h3 className="font-heading text-3xl font-semibold text-white">
+                    Machine Service Management System
+                  </h3>
+                  <p className="text-base leading-7 text-zinc-400">
+                    Unified platform for machine maintenance and service operations. QR-powered workflows, real-time job tracking, and customer self-service portal.
+                  </p>
+                  <motion.a
+                    href="#"
+                    whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_20px_rgba(59,130,246,0.2)] transition"
+                  >
+                    View Demo
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      →
+                    </motion.span>
+                  </motion.a>
+                </div>
+              </FloatingElement>
+            </GlassMonolith>
+          </CinematicStaggerItem>
+
+          {/* Car Service Center Monitoring System */}
+          <CinematicStaggerItem>
+            <GlassMonolith variant="premium" glowColor="indigo">
+              <FloatingElement intensity="subtle">
+                <div className="space-y-6">
+                  <div className="inline-flex rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-indigo-400/80 backdrop-blur-sm">
+                    Workshop Management
+                  </div>
+                  <h3 className="font-heading text-3xl font-semibold text-white">
+                    Car Service Center Monitoring System
+                  </h3>
+                  <p className="text-base leading-7 text-zinc-400">
+                    Digital platform for vehicle service centers. Streamline bookings, job assignments, inventory, and customer communication in one dashboard.
+                  </p>
+                  <motion.a
+                    href="#"
+                    whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(99, 102, 241, 0.3)" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_20px_rgba(99,102,241,0.2)] transition"
+                  >
+                    View Demo
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      →
+                    </motion.span>
+                  </motion.a>
+                </div>
+              </FloatingElement>
+            </GlassMonolith>
+          </CinematicStaggerItem>
         </CinematicStagger>
       </section>
 
