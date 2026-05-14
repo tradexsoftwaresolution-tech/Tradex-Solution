@@ -9,9 +9,9 @@ import { GlassMonolith } from "@/components/GlassMonolith";
 import { CinematicHero, MonumentalText } from "@/components/CinematicHero";
 import { getAssetPath } from "@/lib/utils";
 import { useState, useEffect } from "react";
-import garmentLineImage from "@/assets/images/garmentline.png";
-import machineServiceImage from "@/assets/images/machine-service-system.png";
-import carServiceImage from "@/assets/images/car-service-center.png";
+import garmentLineImage from "@/assets/images/optimized/garmentline-card.jpg";
+import machineServiceImage from "@/assets/images/optimized/machine-service-system-card.jpg";
+import carServiceImage from "@/assets/images/optimized/car-service-center-card.jpg";
 
 type Solution = {
   title: string;
@@ -50,6 +50,18 @@ const solutions: Solution[] = [
     description: "Streamline operations with intelligent inventory tracking, asset management, and automated workflow systems.",
     points: ["Real-time inventory tracking", "Barcode & RFID integration", "Automated reordering systems", "Multi-location management"],
     color: "cyan",
+  },
+  {
+    title: "Data Engineering Services",
+    description: "Design reliable data pipelines, warehouses, and analytics foundations that turn operational data into usable business intelligence.",
+    points: ["ETL & ELT pipeline development", "Data warehouse architecture", "Data cleansing & transformation", "Analytics-ready reporting layers"],
+    color: "blue",
+  },
+  {
+    title: "IoT Services",
+    description: "Connect devices, machines, and sensors into real-time monitoring systems that improve visibility, automation, and operational control.",
+    points: ["Sensor & device integration", "Real-time telemetry dashboards", "Predictive maintenance workflows", "Industrial automation connectivity"],
+    color: "indigo",
   },
 ];
 
@@ -225,7 +237,9 @@ const services = [
   "API Development & Integration",
   "UI/UX Design & Prototyping",
   "Database Design & Optimization",
+  "Data Engineering Services",
   "Business Intelligence & Reporting",
+  "IoT Services",
   "Inventory Management Systems",
   "Real-time Tracking Solutions",
   "Data Analytics & Visualization",

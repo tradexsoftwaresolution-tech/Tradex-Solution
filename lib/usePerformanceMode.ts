@@ -7,6 +7,12 @@ type PerformanceMode = {
   shouldUseStaticEffects: boolean;
 };
 
+type DataSavingNavigator = Navigator & {
+  connection?: {
+    saveData?: boolean;
+  };
+};
+
 export function usePerformanceMode(): PerformanceMode {
   const [mode, setMode] = useState<PerformanceMode>({
     shouldReduceMotion: false,
@@ -15,25 +21,27 @@ export function usePerformanceMode(): PerformanceMode {
 
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const staticEffectsQuery = window.matchMedia("(max-width: 1023px), (pointer: coarse)");
+    const reducedDataQuery = window.matchMedia("(prefers-reduced-data: reduce)");
 
     const updateMode = () => {
       const shouldReduceMotion = reducedMotionQuery.matches;
+      const shouldReduceData =
+        reducedDataQuery.matches || Boolean((navigator as DataSavingNavigator).connection?.saveData);
 
       setMode({
         shouldReduceMotion,
-        shouldUseStaticEffects: shouldReduceMotion || staticEffectsQuery.matches,
+        shouldUseStaticEffects: shouldReduceMotion || shouldReduceData,
       });
     };
 
     updateMode();
 
     reducedMotionQuery.addEventListener("change", updateMode);
-    staticEffectsQuery.addEventListener("change", updateMode);
+    reducedDataQuery.addEventListener("change", updateMode);
 
     return () => {
       reducedMotionQuery.removeEventListener("change", updateMode);
-      staticEffectsQuery.removeEventListener("change", updateMode);
+      reducedDataQuery.removeEventListener("change", updateMode);
     };
   }, []);
 

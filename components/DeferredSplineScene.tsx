@@ -151,6 +151,8 @@ export default function DeferredSplineScene({
       viewer.style.display = "block";
       viewer.style.width = "100%";
       viewer.style.height = "100%";
+      viewer.style.pointerEvents = "auto";
+      viewer.style.touchAction = "none";
 
       mountRef.current.innerHTML = "";
       mountRef.current.appendChild(viewer);
@@ -196,7 +198,7 @@ export default function DeferredSplineScene({
 
       <div
         ref={mountRef}
-        className={`absolute inset-0 transition-opacity duration-700 ${isReady ? "opacity-100" : "opacity-0"}`}
+        className={`pointer-events-auto absolute inset-0 transition-opacity duration-700 ${isReady ? "opacity-100" : "opacity-0"}`}
       />
     </div>
   );

@@ -39,7 +39,7 @@ export function NebulaBackground() {
     if (!ctx) return;
 
     const setCanvasSize = () => {
-      const dpr = Math.min(window.devicePixelRatio, 2); // Limit DPR for performance
+      const dpr = Math.min(window.devicePixelRatio, 1.5);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
@@ -75,7 +75,7 @@ export function NebulaBackground() {
 
     // Create fewer, larger nebula particles
     const createNebulaParticles = () => {
-      const particleCount = 120; // Increased from 80
+      const particleCount = 72;
       
       for (let i = 0; i < particleCount; i++) {
         const x = (Math.random() - 0.5) * window.innerWidth * 2;
@@ -118,7 +118,7 @@ export function NebulaBackground() {
     };
 
     let lastTime = performance.now();
-    const targetFPS = 30;
+    const targetFPS = 24;
     const frameTime = 1000 / targetFPS;
 
     const animate = (currentTime: number) => {
@@ -219,7 +219,7 @@ export function NebulaBackground() {
     if (!ctx) return;
 
     const setCanvasSize = () => {
-      const dpr = Math.min(window.devicePixelRatio, 2);
+      const dpr = Math.min(window.devicePixelRatio, 1.5);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
@@ -246,7 +246,7 @@ export function NebulaBackground() {
       twinkleOffset: number;
     }> = [];
 
-    for (let i = 0; i < 1500; i++) { // Increased from 800 to 1500
+    for (let i = 0; i < 650; i++) {
       stars.push({
         x: (Math.random() - 0.5) * window.innerWidth * 3,
         y: (Math.random() - 0.5) * window.innerHeight * 3,
@@ -261,7 +261,7 @@ export function NebulaBackground() {
     let animationFrame: number;
     let time = 0;
     let lastTime = performance.now();
-    const targetFPS = 30;
+    const targetFPS = 24;
     const frameTime = 1000 / targetFPS;
 
     const animate = (currentTime: number) => {
@@ -361,7 +361,7 @@ export function NebulaBackground() {
     if (!ctx) return;
 
     const setCanvasSize = () => {
-      const dpr = Math.min(window.devicePixelRatio, 2);
+      const dpr = Math.min(window.devicePixelRatio, 1.5);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
@@ -390,7 +390,7 @@ export function NebulaBackground() {
     }> = [];
 
     // Create asteroids
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 22; i++) {
       asteroids.push({
         x: (Math.random() - 0.5) * window.innerWidth * 4,
         y: (Math.random() - 0.5) * window.innerHeight * 4,
@@ -409,7 +409,7 @@ export function NebulaBackground() {
 
     let animationFrame: number;
     let lastTime = performance.now();
-    const targetFPS = 30;
+    const targetFPS = 24;
     const frameTime = 1000 / targetFPS;
 
     const drawAsteroid = (x: number, y: number, size: number, rotation: number, shape: number, color: { r: number; g: number; b: number }, opacity: number) => {
