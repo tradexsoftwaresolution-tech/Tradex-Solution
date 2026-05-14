@@ -330,9 +330,12 @@ export default function TradexInnovationPage() {
               className="relative rounded-2xl border border-cyan-300/55 bg-gradient-to-br from-cyan-500/28 to-blue-500/18 px-3 py-2 shadow-[0_0_44px_rgba(34,211,238,0.42),inset_0_0_28px_rgba(34,211,238,0.16)] backdrop-blur-xl"
             >
               <div className="absolute inset-[-1px] rounded-2xl bg-gradient-to-br from-cyan-400/30 to-blue-400/20 opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-              <img
+              <Image
                 src={getAssetPath("/Tradex-innovations.png")}
                 alt="Tradex Innovation"
+                width={788}
+                height={317}
+                priority
                 className="relative h-11 w-auto brightness-125 contrast-125 drop-shadow-[0_0_12px_rgba(103,232,249,0.45)] sm:h-12"
               />
             </motion.div>

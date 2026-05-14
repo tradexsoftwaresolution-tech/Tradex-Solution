@@ -1,11 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePerformanceMode } from "@/lib/usePerformanceMode";
+
+const INTRO_DURATION_MS = 4800;
 
 export default function TradexIntro() {
   const [isVisible, setIsVisible] = useState(false);
+  const { shouldUseStaticEffects } = usePerformanceMode();
 
   useEffect(() => {
+    if (shouldUseStaticEffects) {
+      return;
+    }
+
     // Check if intro has already been shown in this session
     const hasShownIntro = sessionStorage.getItem("tradex-intro-shown");
     
@@ -14,12 +22,12 @@ export default function TradexIntro() {
       setIsVisible(true);
       sessionStorage.setItem("tradex-intro-shown", "true");
       
-      const timer = window.setTimeout(() => setIsVisible(false), 6800);
+      const timer = window.setTimeout(() => setIsVisible(false), INTRO_DURATION_MS);
       return () => window.clearTimeout(timer);
     }
-  }, []);
+  }, [shouldUseStaticEffects]);
 
-  if (!isVisible) {
+  if (!isVisible || shouldUseStaticEffects) {
     return null;
   }
 

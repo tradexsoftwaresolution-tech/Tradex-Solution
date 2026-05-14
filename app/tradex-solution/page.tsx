@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -133,10 +134,14 @@ function HeroCard() {
           ease: "easeInOut"
         }}
       >
-        <img
+        <Image
           src={getAssetPath("/hero image.png")}
           alt="Tradex Solution Hero"
-          className="w-full h-auto object-contain drop-shadow-2xl"
+          width={669}
+          height={373}
+          priority
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="h-auto w-full object-contain drop-shadow-2xl"
         />
       </motion.div>
     </motion.div>
@@ -195,9 +200,12 @@ export default function TradexSolutionPage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <Link href="/" className="flex items-center gap-3">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2 shadow-[0_16px_40px_rgba(0,0,0,0.28)] backdrop-blur">
-              <img
+              <Image
                 src={getAssetPath("/Gemini_Generated_Image_v1z8tzv1z8tzv1z8-removebg-preview.png")}
                 alt="Tradex Solution"
+                width={786}
+                height={317}
+                priority
                 className="h-11 w-auto sm:h-12"
               />
             </div>
@@ -335,9 +343,12 @@ export default function TradexSolutionPage() {
                 <div className="relative">
                   <div className="mb-6 flex items-center justify-between">
                     <div className="rounded-xl bg-white px-6 py-4 shadow-lg">
-                      <img
+                      <Image
                         src={getAssetPath("/optitex.png")}
                         alt="Optitex"
+                        width={500}
+                        height={500}
+                        sizes="128px"
                         className="h-16 w-auto transition-all duration-300 group-hover:scale-105"
                       />
                     </div>
@@ -387,9 +398,12 @@ export default function TradexSolutionPage() {
                 <div className="relative">
                   <div className="mb-6 flex items-center justify-between">
                     <div className="rounded-xl bg-white px-6 py-4 shadow-lg">
-                      <img
+                      <Image
                         src={getAssetPath("/sinajet.png")}
                         alt="Sinajet"
+                        width={500}
+                        height={500}
+                        sizes="128px"
                         className="h-16 w-auto transition-all duration-300 group-hover:scale-105"
                       />
                     </div>

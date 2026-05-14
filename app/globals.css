@@ -19,24 +19,6 @@
   }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Optimize rendering for animated elements */
-[class*="animate-"],
-[class*="motion-"] {
-  will-change: transform, opacity;
-}
-
-/* Remove will-change after animation completes to free resources */
-@media (prefers-reduced-motion: no-preference) {
-  [class*="animate-"]:not(:hover):not(:focus) {
-    will-change: auto;
-  }
-}
-
 :root {
   color-scheme: dark;
 }
@@ -47,6 +29,12 @@ html {
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -97,7 +85,8 @@ button {
 }
 
 .tradex-intro {
-  animation: tradex-intro-exit 6.8s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  --tradex-intro-duration: 4.8s;
+  animation: tradex-intro-exit var(--tradex-intro-duration) cubic-bezier(0.76, 0, 0.24, 1) forwards;
   background: #070707;
 }
 
@@ -115,7 +104,7 @@ button {
   inset: 0;
   transform: translateX(-42vw) skewX(-10deg) scale(0.35);
   filter: drop-shadow(10px 16px 0 rgba(24, 35, 38, 0.28));
-  animation: tradex-e-swoop 6.8s cubic-bezier(0.68, 0, 0.2, 1) forwards;
+  animation: tradex-e-swoop var(--tradex-intro-duration) cubic-bezier(0.68, 0, 0.2, 1) forwards;
 }
 
 .tradex-intro__swoop::before {
@@ -127,7 +116,7 @@ button {
   height: 100%;
   background: linear-gradient(180deg, #ef3437, #d71920 42%, #a70f14);
   transform-origin: bottom center;
-  animation: tradex-e-spine 6.8s cubic-bezier(0.68, 0, 0.2, 1) forwards;
+  animation: tradex-e-spine var(--tradex-intro-duration) cubic-bezier(0.68, 0, 0.2, 1) forwards;
 }
 
 .tradex-intro__swoop-bar {
@@ -136,7 +125,7 @@ button {
   height: 20%;
   background: linear-gradient(90deg, #ef3437 0%, #d71920 60%, #9c0d12 100%);
   transform-origin: left center;
-  animation: tradex-e-bar 6.8s cubic-bezier(0.68, 0, 0.2, 1) forwards;
+  animation: tradex-e-bar var(--tradex-intro-duration) cubic-bezier(0.68, 0, 0.2, 1) forwards;
 }
 
 .tradex-intro__swoop-bar--top {
@@ -163,7 +152,7 @@ button {
   justify-content: center;
   gap: clamp(0.14rem, 0.82vw, 0.9rem);
   transform: translateY(0) scale(1);
-  animation: tradex-word-reveal 6.8s cubic-bezier(0.2, 0.9, 0.24, 1) forwards;
+  animation: tradex-word-reveal var(--tradex-intro-duration) cubic-bezier(0.2, 0.9, 0.24, 1) forwards;
 }
 
 .tradex-intro__word::after {
@@ -177,7 +166,7 @@ button {
   transform: scaleX(0);
   transform-origin: left center;
   box-shadow: 7px 9px 0 rgba(26, 42, 46, 0.28);
-  animation: tradex-underline-in 6.8s cubic-bezier(0.2, 0.9, 0.24, 1) forwards;
+  animation: tradex-underline-in var(--tradex-intro-duration) cubic-bezier(0.2, 0.9, 0.24, 1) forwards;
 }
 
 .tradex-intro__letter {
@@ -193,8 +182,8 @@ button {
     0 1px 0 rgba(255, 255, 255, 0.36),
     0 0 18px rgba(255, 255, 255, 0.15),
     9px 12px 0 rgba(255, 255, 255, 0.08);
-  animation: tradex-letter-snap 6.8s cubic-bezier(0.2, 0.9, 0.24, 1) forwards;
-  animation-delay: calc(2.18s + var(--letter-index) * 0.06s);
+  animation: tradex-letter-snap var(--tradex-intro-duration) cubic-bezier(0.2, 0.9, 0.24, 1) forwards;
+  animation-delay: calc(1.52s + var(--letter-index) * 0.06s);
 }
 
 .tradex-intro__e-mark {

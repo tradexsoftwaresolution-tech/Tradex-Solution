@@ -1,21 +1,33 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { usePerformanceMode } from "@/lib/usePerformanceMode";
 
 export function NebulaBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const nebulaCanvasRef = useRef<HTMLCanvasElement>(null);
   const asteroidCanvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollYProgress } = useScroll();
+  const { shouldUseStaticEffects } = usePerformanceMode();
   
   // Cinematic forward motion transforms
   const scale = useTransform(scrollYProgress, [0, 1], [1, 2.5]);
   const nebulaScale = useTransform(scrollYProgress, [0, 1], [1, 3]);
+  const asteroidScale = useTransform(scrollYProgress, [0, 1], [1, 2]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [1, 0.9, 0.7, 0.5]);
+  const motionOverlayOpacity = useTransform(scrollYProgress, [0, 0.3, 1], [0, 0.2, 0.4]);
+  const speedLinesOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 1], [0, 0.05, 0.15, 0.25]);
+  const dustScale = useTransform(scrollYProgress, [0, 1], [1, 1.8]);
+  const dustOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 0.3, 0.2]);
+  const vignetteOpacity = useTransform(scrollYProgress, [0, 1], [0.6, 0.8]);
 
   // Photorealistic nebula animation with fluid dynamics - OPTIMIZED
   useEffect(() => {
+    if (shouldUseStaticEffects) {
+      return;
+    }
+
     const canvas = nebulaCanvasRef.current;
     if (!canvas) return;
 
@@ -32,6 +44,7 @@ export function NebulaBackground() {
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
     setCanvasSize();
@@ -105,7 +118,7 @@ export function NebulaBackground() {
     };
 
     let lastTime = performance.now();
-    const targetFPS = 60;
+    const targetFPS = 30;
     const frameTime = 1000 / targetFPS;
 
     const animate = (currentTime: number) => {
@@ -188,10 +201,14 @@ export function NebulaBackground() {
       cancelAnimationFrame(animationFrame);
       unsubscribe();
     };
-  }, [scrollYProgress]);
+  }, [scrollYProgress, shouldUseStaticEffects]);
 
   // Star field animation - OPTIMIZED
   useEffect(() => {
+    if (shouldUseStaticEffects) {
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -207,6 +224,7 @@ export function NebulaBackground() {
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
     setCanvasSize();
@@ -243,7 +261,7 @@ export function NebulaBackground() {
     let animationFrame: number;
     let time = 0;
     let lastTime = performance.now();
-    const targetFPS = 60;
+    const targetFPS = 30;
     const frameTime = 1000 / targetFPS;
 
     const animate = (currentTime: number) => {
@@ -325,10 +343,14 @@ export function NebulaBackground() {
       cancelAnimationFrame(animationFrame);
       unsubscribe();
     };
-  }, [scrollYProgress]);
+  }, [scrollYProgress, shouldUseStaticEffects]);
 
   // Asteroid field animation - NEW
   useEffect(() => {
+    if (shouldUseStaticEffects) {
+      return;
+    }
+
     const canvas = asteroidCanvasRef.current;
     if (!canvas) return;
 
@@ -344,6 +366,7 @@ export function NebulaBackground() {
       canvas.height = window.innerHeight * dpr;
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     };
     setCanvasSize();
@@ -386,7 +409,7 @@ export function NebulaBackground() {
 
     let animationFrame: number;
     let lastTime = performance.now();
-    const targetFPS = 60;
+    const targetFPS = 30;
     const frameTime = 1000 / targetFPS;
 
     const drawAsteroid = (x: number, y: number, size: number, rotation: number, shape: number, color: { r: number; g: number; b: number }, opacity: number) => {
@@ -491,7 +514,19 @@ export function NebulaBackground() {
       cancelAnimationFrame(animationFrame);
       unsubscribe();
     };
-  }, [scrollYProgress]);
+  }, [scrollYProgress, shouldUseStaticEffects]);
+
+  if (shouldUseStaticEffects) {
+    return (
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#000308] via-[#020510] to-[#000308]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_25%,rgba(34,211,238,0.14),transparent_24%),radial-gradient(circle_at_78%_18%,rgba(59,130,246,0.12),transparent_26%),radial-gradient(circle_at_50%_75%,rgba(14,165,233,0.1),transparent_32%)]" />
+        <div className="absolute left-[8%] top-[12%] h-48 w-48 rounded-full bg-cyan-400/10 blur-3xl" />
+        <div className="absolute bottom-[10%] right-[12%] h-56 w-56 rounded-full bg-blue-500/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_24%,rgba(0,0,0,0.5)_72%,rgba(0,0,0,0.86)_100%)]" />
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -522,10 +557,7 @@ export function NebulaBackground() {
 
       {/* Asteroid field canvas */}
       <motion.div
-        style={{ 
-          scale: useTransform(scrollYProgress, [0, 1], [1, 2]),
-          opacity 
-        }}
+        style={{ scale: asteroidScale, opacity }}
         className="absolute inset-0 flex items-center justify-center will-change-transform"
       >
         <canvas
@@ -536,9 +568,7 @@ export function NebulaBackground() {
 
       {/* Motion overlay for speed effect */}
       <motion.div 
-        style={{ 
-          opacity: useTransform(scrollYProgress, [0, 0.3, 1], [0, 0.2, 0.4])
-        }}
+        style={{ opacity: motionOverlayOpacity }}
         className="absolute inset-0 pointer-events-none will-change-opacity"
       >
         <div 
@@ -551,9 +581,7 @@ export function NebulaBackground() {
 
       {/* Speed lines for cinematic effect - OPTIMIZED */}
       <motion.div 
-        style={{ 
-          opacity: useTransform(scrollYProgress, [0, 0.2, 0.5, 1], [0, 0.05, 0.15, 0.25])
-        }}
+        style={{ opacity: speedLinesOpacity }}
         className="absolute inset-0 pointer-events-none overflow-hidden will-change-opacity"
       >
         {[...Array(12)].map((_, i) => {
@@ -592,10 +620,7 @@ export function NebulaBackground() {
 
       {/* Dust particles for additional depth */}
       <motion.div 
-        style={{ 
-          scale: useTransform(scrollYProgress, [0, 1], [1, 1.8]),
-          opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 0.3, 0.2])
-        }}
+        style={{ scale: dustScale, opacity: dustOpacity }}
         className="absolute inset-0 pointer-events-none will-change-transform"
       >
         {[...Array(30)].map((_, i) => {
@@ -632,9 +657,7 @@ export function NebulaBackground() {
 
       {/* Vignette effect - intensifies with scroll */}
       <motion.div 
-        style={{ 
-          opacity: useTransform(scrollYProgress, [0, 1], [0.6, 0.8])
-        }}
+        style={{ opacity: vignetteOpacity }}
         className="absolute inset-0 pointer-events-none will-change-opacity"
       >
         <div

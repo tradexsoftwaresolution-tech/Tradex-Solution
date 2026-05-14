@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { usePerformanceMode } from "@/lib/usePerformanceMode";
 
 /**
  * Subtle parallax effect on background elements based on mouse movement
  * Creates depth without being distracting
  */
 export function ParallaxBackground() {
+  const { shouldUseStaticEffects } = usePerformanceMode();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -15,8 +17,14 @@ export function ParallaxBackground() {
   const springConfig = { damping: 30, stiffness: 100 };
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
+  const secondaryX = useSpring(useTransform(mouseX, (value) => value * -0.5), springConfig);
+  const secondaryY = useSpring(useTransform(mouseY, (value) => value * -0.5), springConfig);
 
   useEffect(() => {
+    if (shouldUseStaticEffects) {
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
@@ -30,9 +38,18 @@ export function ParallaxBackground() {
       mouseY.set(yPct * 20);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, shouldUseStaticEffects]);
+
+  if (shouldUseStaticEffects) {
+    return (
+      <>
+        <div className="pointer-events-none absolute left-[-12rem] top-20 -z-10 h-80 w-80 rounded-full bg-[#ed1c24]/10 blur-3xl" />
+        <div className="pointer-events-none absolute right-[-10rem] top-[32rem] -z-10 h-96 w-96 rounded-full bg-red-950/30 blur-3xl" />
+      </>
+    );
+  }
 
   return (
     <>
@@ -42,7 +59,7 @@ export function ParallaxBackground() {
         className="pointer-events-none absolute left-[-12rem] top-20 -z-10 h-80 w-80 rounded-full bg-[#ed1c24]/14 blur-3xl"
       />
       <motion.div
-        style={{ x: useSpring(mouseX.get() * -0.5, springConfig), y: useSpring(mouseY.get() * -0.5, springConfig) }}
+        style={{ x: secondaryX, y: secondaryY }}
         className="pointer-events-none absolute right-[-10rem] top-[32rem] -z-10 h-96 w-96 rounded-full bg-red-950/35 blur-3xl"
       />
     </>
